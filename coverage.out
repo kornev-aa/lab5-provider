@@ -1,0 +1,11 @@
+mode: set
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:14.111,15.23 1 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:16.23,17.44 1 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:18.13,19.44 1 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:23.13,29.19 3 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:29.19,30.19 1 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:32.5,36.19 3 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:36.19,37.19 1 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:40.5,52.37 6 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:52.37,55.6 2 0
+github.com/kornev-aa/lab5-tests/cmd/linux/cli/main.go:57.5,57.75 1 0
