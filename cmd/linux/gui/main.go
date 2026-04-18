@@ -28,15 +28,9 @@ func main() {
 
     log := logger.New()
 
-    var store storage.LocationStorage
-    switch cfg.StorageType {
-    case "file":
-        store = storage.NewFileStorage(cfg.FilePath)
-        log.Info("Используется файловое хранилище")
-    default:
-        store = storage.NewFileStorage("./location.json")
-        log.Info("Используется файловое хранилище по умолчанию")
-    }
+    // Используем координаты из конфига
+    store := storage.NewMemoryStorage(cfg.L.Lat, cfg.L.Long)
+    log.Info("Используется хранилище из конфига")
 
     // Создаём кэш в памяти
     memCache := cache.NewMemoryCache()

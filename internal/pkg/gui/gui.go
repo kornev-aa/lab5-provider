@@ -60,10 +60,15 @@ func (g *GUIApp) Run() error {
 
         g.log.Debug(fmt.Sprintf("Запрос погоды для координат: %.4f, %.4f", latVal, lonVal))
 
-        temp := g.weather.GetTemperature(latVal, lonVal)
+        tempInfo, err := g.weather.GetTemperature(latVal, lonVal)
+        if err != nil {
+            resultLabel.SetText(fmt.Sprintf("Ошибка: %s", err.Error()))
+            g.log.Error("Ошибка получения погоды", err)
+            return
+        }
 
-        resultLabel.SetText(fmt.Sprintf("Температура: %.2f°C", temp.Temp))
-        g.log.Info(fmt.Sprintf("Получена погода: %.2f°C", temp.Temp))
+        resultLabel.SetText(fmt.Sprintf("Температура: %.2f°C", tempInfo.Temp))
+        g.log.Info(fmt.Sprintf("Получена погода: %.2f°C", tempInfo.Temp))
     })
 
     saveLocationBtn := widget.NewButton("Сохранить координаты", func() {

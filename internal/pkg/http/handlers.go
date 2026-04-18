@@ -44,9 +44,14 @@ func (h *Handlers) GetWeather(w http.ResponseWriter, r *http.Request) {
 
     h.log.Debug("Getting weather for coordinates: " + formatCoords(lat, lon))
 
-    temp := h.weather.GetTemperature(lat, lon)
+    tempInfo, err := h.weather.GetTemperature(lat, lon)
+    if err != nil {
+        h.log.Error("Failed to get weather", err)
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
 
-    result := map[string]float64{"temperature": temp.Temp}
+    result := map[string]float64{"temperature": tempInfo.Temp}
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(result)
 }

@@ -31,14 +31,9 @@ func main() {
     logg := logger.New()
 
     var store storage.LocationStorage
-    switch cfg.StorageType {
-    case "file":
-        store = storage.NewFileStorage(cfg.FilePath)
-        logg.Info("Using file storage")
-    default:
-        store = storage.NewFileStorage("./location.json")
-        logg.Info("Using default file storage")
-    }
+    // Используем координаты из конфига как источник "хранилища"
+    store = storage.NewMemoryStorage(cfg.L.Lat, cfg.L.Long)
+    logg.Info("Using memory storage from config")
 
     // Создаём кэш в памяти
     memCache := cache.NewMemoryCache()
@@ -46,14 +41,14 @@ func main() {
 
     handlers := httphandlers.NewHandlers(logg, store, memCache, cacheTTL)
 
-    r := chi.NewRouter()
-    r.Use(middleware.Logger)
-    r.Use(middleware.Recoverer)
+    router := chi.NewRouter()
+    router.Use(middleware.Logger)
+    router.Use(middleware.Recoverer)
 
-    r.Get("/weather", handlers.GetWeather)
-    r.Post("/location", handlers.SaveLocation)
-    r.Get("/location", handlers.GetLocation)
+    router.Get("/weather", handlers.GetWeather)
+    router.Post("/location", handlers.SaveLocation)
+    router.Get("/location", handlers.GetLocation)
 
     logg.Info(fmt.Sprintf("HTTP server starting on :8080"))
-    http.ListenAndServe(":8080", r)
+    http.ListenAndServe(":8080", router)
 }
