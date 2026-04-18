@@ -4,9 +4,9 @@ import (
     "testing"
     "github.com/stretchr/testify/assert"
     "go.uber.org/mock/gomock"
-    "github.com/kornev-aa/lab5-tests/internal/domain/models"
-    "github.com/kornev-aa/lab5-tests/internal/pkg/app/cli/mocks"
-    "github.com/kornev-aa/lab5-tests/pkg/config"
+    "github.com/kornev-aa/lab5-provider/internal/domain/models"
+    "github.com/kornev-aa/lab5-provider/internal/pkg/app/cli/mocks"
+    "github.com/kornev-aa/lab5-provider/pkg/config"
 )
 
 type testLogger struct{}

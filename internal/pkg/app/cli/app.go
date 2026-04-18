@@ -2,8 +2,8 @@ package cli
 
 import (
     "fmt"
-    "github.com/kornev-aa/lab5-tests/internal/domain/models"
-    "github.com/kornev-aa/lab5-tests/pkg/config"
+    "github.com/kornev-aa/lab5-provider/internal/domain/models"
+    "github.com/kornev-aa/lab5-provider/pkg/config"
 )
 
 type Logger interface {
@@ -13,33 +13,33 @@ type Logger interface {
 }
 
 type WeatherInfo interface {
-    GetTemperature(lat, lon float64) models.TempInfo
+    GetTemperature(lat, lon float64) (models.TempInfo, error)
 }
 
 type cliApp struct {
-    l   Logger
-    wi  WeatherInfo
-    cfg config.Config
+    l    Logger
+    wi   WeatherInfo
+    conf config.Config
 }
 
-func New(l Logger, wi WeatherInfo, cfg config.Config) *cliApp {
+func New(l Logger, wi WeatherInfo, c config.Config) *cliApp {
     return &cliApp{
-        l:   l,
-        wi:  wi,
-        cfg: cfg,
+        l:    l,
+        wi:   wi,
+        conf: c,
     }
 }
 
 func (c *cliApp) Run() error {
     c.l.Info("Запуск приложения")
+    c.l.Info(fmt.Sprintf("Координаты из конфига: широта=%.4f, долгота=%.4f", c.conf.L.Lat, c.conf.L.Long))
 
-    lat := c.cfg.L.Lat
-    lon := c.cfg.L.Long
+    tempInfo, err := c.wi.GetTemperature(c.conf.L.Lat, c.conf.L.Long)
+    if err != nil {
+        c.l.Error("Ошибка получения температуры", err)
+        return err
+    }
 
-    c.l.Info(fmt.Sprintf("Координаты из конфига: широта=%.4f, долгота=%.4f", lat, lon))
-
-    temp := c.wi.GetTemperature(lat, lon)
-
-    fmt.Printf("Температура воздуха - %.2f градусов цельсия\n", temp.Temp)
+    fmt.Printf("Температура воздуха - %.2f градусов цельсия\n", tempInfo.Temp)
     return nil
 }

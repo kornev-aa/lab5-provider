@@ -8,11 +8,11 @@ import (
     "time"
     "github.com/go-chi/chi/v5"
     "github.com/go-chi/chi/v5/middleware"
-    httphandlers "github.com/kornev-aa/lab5-tests/internal/pkg/http"
-    "github.com/kornev-aa/lab5-tests/pkg/cache"
-    "github.com/kornev-aa/lab5-tests/pkg/config"
-    "github.com/kornev-aa/lab5-tests/pkg/logger"
-    "github.com/kornev-aa/lab5-tests/pkg/storage"
+    httphandlers "github.com/kornev-aa/lab5-provider/internal/pkg/http"
+    "github.com/kornev-aa/lab5-provider/pkg/cache"
+    "github.com/kornev-aa/lab5-provider/pkg/config"
+    "github.com/kornev-aa/lab5-provider/pkg/logger"
+    "github.com/kornev-aa/lab5-provider/pkg/storage"
 )
 
 func main() {

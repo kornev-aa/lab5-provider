@@ -7,7 +7,7 @@ import (
     "io"
     "net/http"
     "time"
-    "github.com/kornev-aa/lab5-tests/pkg/cache"
+    "github.com/kornev-aa/lab5-provider/pkg/cache"
 )
 
 type CurrentWeather struct {

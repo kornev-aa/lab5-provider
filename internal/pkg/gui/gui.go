@@ -8,10 +8,10 @@ import (
     "fyne.io/fyne/v2/app"
     "fyne.io/fyne/v2/container"
     "fyne.io/fyne/v2/widget"
-    "github.com/kornev-aa/lab5-tests/internal/adapters/weather"
-    "github.com/kornev-aa/lab5-tests/pkg/cache"
-    "github.com/kornev-aa/lab5-tests/pkg/logger"
-    "github.com/kornev-aa/lab5-tests/pkg/storage"
+    "github.com/kornev-aa/lab5-provider/internal/adapters/weather"
+    "github.com/kornev-aa/lab5-provider/pkg/cache"
+    "github.com/kornev-aa/lab5-provider/pkg/logger"
+    "github.com/kornev-aa/lab5-provider/pkg/storage"
 )
 
 type GUIApp struct {

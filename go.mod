@@ -1,4 +1,4 @@
-module github.com/kornev-aa/lab5-tests
+module github.com/kornev-aa/lab5-provider
 
 go 1.25.0
 

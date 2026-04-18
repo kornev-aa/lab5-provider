@@ -5,7 +5,7 @@ import (
     "time"
     "github.com/stretchr/testify/assert"
     "go.uber.org/mock/gomock"
-    "github.com/kornev-aa/lab5-tests/pkg/cache/mocks"
+    "github.com/kornev-aa/lab5-provider/pkg/cache/mocks"
 )
 
 type testLogger struct{}

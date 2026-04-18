@@ -12,7 +12,7 @@ package mocks
 import (
 	reflect "reflect"
 
-	models "github.com/kornev-aa/lab5-tests/internal/domain/models"
+	models "github.com/kornev-aa/lab5-provider/internal/domain/models"
 	gomock "go.uber.org/mock/gomock"
 )
 

@@ -7,8 +7,8 @@ import (
     "io"
     "net/http"
     "time"
-    "github.com/kornev-aa/lab5-tests/internal/domain/models"
-    "github.com/kornev-aa/lab5-tests/pkg/cache"
+    "github.com/kornev-aa/lab5-provider/internal/domain/models"
+    "github.com/kornev-aa/lab5-provider/pkg/cache"
 )
 
 const apiURL = "https://api.open-meteo.com/v1/forecast"
@@ -46,7 +46,6 @@ func New(l Logger, cache cache.Cache, cacheTTL time.Duration) *WeatherInfo {
 func (wi *WeatherInfo) getWeatherInfo(lat, lon float64) error {
     cacheKey := fmt.Sprintf("weather:%.4f:%.4f", lat, lon)
 
-    // Проверяем кэш
     if cached, found := wi.cache.Get(cacheKey); found {
         var resp response
         if err := json.Unmarshal(cached, &resp); err == nil {
@@ -57,7 +56,6 @@ func (wi *WeatherInfo) getWeatherInfo(lat, lon float64) error {
         }
     }
 
-    // Запрос к API
     params := fmt.Sprintf(
         "latitude=%f&longitude=%f&current=temperature_2m",
         lat, lon,
@@ -87,20 +85,13 @@ func (wi *WeatherInfo) getWeatherInfo(lat, lon float64) error {
 
     wi.c = apiResp.Curr
     wi.isLoaded = true
-
-    // Сохраняем в кэш
     wi.cache.Set(cacheKey, data, wi.cacheTTL)
     wi.l.Debug("Данные сохранены в кэш")
 
     return nil
 }
 
-func (wi *WeatherInfo) GetTemperature(lat, lon float64) models.TempInfo {
-    if err := wi.getWeatherInfo(lat, lon); err != nil {
-        wi.l.Error("Не удалось получить погоду", err)
-        return models.TempInfo{Temp: 0}
-    }
-    return models.TempInfo{
-        Temp: wi.c.Temp,
-    }
+func (wi *WeatherInfo) GetTemperature(lat, lon float64) (models.TempInfo, error) {
+    err := wi.getWeatherInfo(lat, lon)
+    return models.TempInfo{Temp: wi.c.Temp}, err
 }

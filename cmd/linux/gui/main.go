@@ -4,11 +4,11 @@ import (
     "fmt"
     "os"
     "time"
-    "github.com/kornev-aa/lab5-tests/internal/pkg/gui"
-    "github.com/kornev-aa/lab5-tests/pkg/cache"
-    "github.com/kornev-aa/lab5-tests/pkg/config"
-    "github.com/kornev-aa/lab5-tests/pkg/logger"
-    "github.com/kornev-aa/lab5-tests/pkg/storage"
+    "github.com/kornev-aa/lab5-provider/internal/pkg/gui"
+    "github.com/kornev-aa/lab5-provider/pkg/cache"
+    "github.com/kornev-aa/lab5-provider/pkg/config"
+    "github.com/kornev-aa/lab5-provider/pkg/logger"
+    "github.com/kornev-aa/lab5-provider/pkg/storage"
 )
 
 func main() {
